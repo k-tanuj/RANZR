@@ -1,0 +1,53 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Configuration and Secrets
+config/settings.yaml
+secrets.yaml
+*.env
+*.key
+*.pem
+credentials.json
+client_secret.json
+token.json
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Tests and Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+*.coverage
+
+# Build and Distribution
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Logs and Output files
+*.log
+output*.txt
+pipeline*.txt
+pytest*.txt
+*.pdf
+
+# OS generated files
+.DS_Store
+Thumbs.db

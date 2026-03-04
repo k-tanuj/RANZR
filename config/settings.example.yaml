@@ -1,0 +1,23 @@
+# config/settings.yaml
+# Central configuration for RANZR AI detection components
+
+# Detection Thresholds
+thresholds:
+  safe_max: 40
+  suspicious_max: 70
+  high_risk_max: 85
+  critical_min: 85
+
+# Weights for Threat Score Engine
+weights:
+  anomaly: 0.35
+  entropy: 0.25
+  cpu: 0.15
+  file_activity: 0.15
+  process: 0.10
+
+# API Keys and External Services
+elevenlabs_api_key: "YOUR_ELEVENLABS_API_KEY_HERE"
+
+# Chatbot Settings
+chatbot_mode: "offline"  # Enforced: 100% offline, privacy-preserving Ollama connection
