@@ -1,4 +1,4 @@
-# config/settings.yaml
+# config/settings.example.yaml
 # Central configuration for RANZR AI detection components
 
 # Detection Thresholds
@@ -17,7 +17,16 @@ weights:
   process: 0.10
 
 # API Keys and External Services
-elevenlabs_api_key: "YOUR_ELEVENLABS_API_KEY_HERE"
+elevenlabs_api_key: "YOUR_ELEVENLABS_API_KEY"
+
+# Mobile Alerts (Twilio)
+twilio_account_sid: "YOUR_TWILIO_SID"
+twilio_auth_token: "YOUR_TWILIO_AUTH_TOKEN"
+twilio_from_number: "+1YOURTWILIONUMBER"
+twilio_to_number: "+1YOURPHONENUMBER"
+
+# Blockchain Logging (Algorand)
+algorand_mnemonic: "YOUR_ALGORAND_TESTNET_MNEMONIC_WORDS"
 
 # Chatbot Settings
 chatbot_mode: "offline"  # Enforced: 100% offline, privacy-preserving Ollama connection

@@ -12,7 +12,9 @@ from ai_engine.isolation_forest_model import train_model, anomaly_score
 from reporting.explanation import generate_explanation
 from reporting.voice_alert import generate_voice_alert
 from reporting.pdf_report import generate_report
+from reporting.mobile_alert import send_mobile_alert
 from blockchain.prepare_data import prepare_blockchain_payload
+from blockchain.algorand_deploy import log_incident_to_algorand
 from config import settings
 
 def main():
@@ -94,6 +96,13 @@ def main():
         except Exception as e:
             print(f" -> Voice alert failed (Ensure valid ElevenLabs key in config): {e}")
 
+        # --- 7.5 Mobile Alert (Twilio) ---
+        print("\n[Alert] Triggering mobile SMS warning...")
+        try:
+            send_mobile_alert(f"RANZR ALERT: Ransomware behavior detected! Threat Score: {threat_score}. Containment running on PID {mock_suspicious_pid}.")
+        except Exception as e:
+            print(f" -> Mobile alert failed: {e}")
+
         # --- 8. AI Threat Explanation (Ollama) ---
         print("\n[AI Engine] Generating reasoning via local LLM (Ollama)...")
         try:
@@ -113,12 +122,19 @@ def main():
     print(f" -> Report generated at: {pdf_path}")
     print(f" -> Document Hash (SHA-256): {pdf_hash}")
 
-    # --- 10. Blockchain Data Prep for Algorand ---
-    print("\n[Blockchain] Formatting data for Algorand TestNet logging...")
+    # --- 10. Blockchain Data Logging to Algorand ---
+    print("\n[Blockchain] Formatting data for Algorand TestNet...")
     payload = prepare_blockchain_payload(incident_record)
     print(f" -> Payload JSON: {payload['payload']}")
     print(f" -> Payload Hash for Smart Contract: {payload['hash']}")
-    print("\nPipeline Execution Complete. Handing off hash to Nilesh for Blockchain deployment.")
+    
+    print("\n[Blockchain] Logging incident hash to Algorand TestNet...")
+    txid = log_incident_to_algorand(payload['hash'])
+    if txid:
+        incident_record['algorand_txid'] = txid
+        print(f" -> Verified blockchain entry recorded.")
+    
+    print("\nPipeline Execution Complete.")
 
 if __name__ == "__main__":
     main()

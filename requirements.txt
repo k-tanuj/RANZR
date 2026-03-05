@@ -6,3 +6,5 @@ reportlab
 pyyaml
 requests
 pytest
+py-algorand-sdk
+twilio
