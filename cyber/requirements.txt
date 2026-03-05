@@ -1,0 +1,3 @@
+# Core runtime dependencies for the cyber monitoring module
+watchdog>=3.0.0
+psutil>=5.9.0
